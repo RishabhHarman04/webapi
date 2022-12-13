@@ -4,6 +4,7 @@ namespace webapi.API.Repositories
 {
     public interface IRegionRepository
     {
-        IEnumerable<Region> GetAll();
+        Task<IEnumerable<Region>> GetAllAsync();
+        Task<Region>GetAsync(Guid id);
     }
 }

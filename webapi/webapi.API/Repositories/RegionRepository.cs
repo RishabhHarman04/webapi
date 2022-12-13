@@ -1,4 +1,5 @@
-﻿using webapi.API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using webapi.API.Data;
 using webapi.API.Models.Domain;
 
 namespace webapi.API.Repositories
@@ -12,9 +13,14 @@ namespace webapi.API.Repositories
             this.walksDbcontext = walksDbcontext;
 
         }
-        public IEnumerable<Region> GetAll()
+        public async Task<IEnumerable<Region>>GetAllAsync()
         {
-            return walksDbcontext.Regions.ToList();
+            return await walksDbcontext.Regions.ToListAsync(); 
+        }
+
+        public async Task<Region> GetAsync(Guid id)
+        {
+            return await walksDbcontext.Regions.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }
